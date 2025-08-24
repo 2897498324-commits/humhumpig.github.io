@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alicia生日快乐！</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9eea 0%, #c86dd7 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        .birthday-message {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .cake-container {
+            position: relative;
+            height: 200px;
+            margin: 40px 0;
+        }
+        
+        .cake {
+            position: relative;
+            width: 200px;
+            height: 100px;
+            margin: 0 auto;
+        }
+        
+        .cake-base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 70px;
+            background: #f8bbd3;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .cake-top {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 50px;
+            background: #f48fb1;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .candle {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 40px;
+            background: #fff;
+            border-radius: 5px;
+        }
+        
+        .flame {
+            position: absolute;
+            bottom: 160px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 30px;
+            background: #ffeb3b;
+            border-radius: 50% 50% 20% 20%;
+            animation: flicker 1s infinite alternate;
+            box-shadow: 0 0 20px #ff9800, 0 0 40px #ff9800;
+        }
+        
+        .decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+        
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .balloon:nth-child(1) {
+            background: rgba(255, 0, 0, 0.7);
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .balloon:nth-child(2) {
+            background: rgba(0, 255, 0, 0.7);
+            left: 20%;
+            animation-delay: 2s;
+        }
+        
+        .balloon:nth-child(3) {
+            background: rgba(0, 0, 255, 0.7);
+            left: 30%;
+            animation-delay: 4s;
+        }
+        
+        .balloon:nth-child(4) {
+            background: rgba(255, 255, 0, 0.7);
+            left: 70%;
+            animation-delay: 6s;
+        }
+        
+        .balloon:nth-child(5) {
+            background: rgba(255, 0, 255, 0.7);
+            left: 80%;
+            animation-delay: 8s;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            animation: fall 5s infinite;
+        }
+        
+        .confetti:nth-child(odd) {
+            background: #ff5252;
+        }
+        
+        .confetti:nth-child(even) {
+            background: #40c4ff;
+        }
+        
+        button {
+            background: #e91e63;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: #d81b60;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); }
+            100% { transform: translateX(-50%) scale(1.1) translateY(-2px); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(20deg); }
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decoration">
+        <!-- 气球 -->
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        
+        <!-- 彩色纸屑 -->
+        <div class="confetti" style="left: 10%; animation-delay: 1s;"></div>
+        <div class="confetti" style="left: 20%; animation-delay: 3s;"></div>
+        <div class="confetti" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="confetti" style="left: 40%; animation-delay: 4s;"></div>
+        <div class="confetti" style="left: 50%; animation-delay: 5s;"></div>
+        <div class="confetti" style="left: 60%; animation-delay: 1.5s;"></div>
+        <div class="confetti" style="left: 70%; animation-delay: 2.5s;"></div>
+        <div class="confetti" style="left: 80%; animation-delay: 3.5s;"></div>
+        <div class="confetti" style="left: 90%; animation-delay: 0.5s;"></div>
+    </div>
+
+    <div class="container">
+        <h1>🎂   生日快乐！🎉</h1>
+        
+        <div class="birthday-message">
+            <p>Dear Cia，</p>
+            <p>在这个特别的日子里，愿你被爱和欢笑包围！</p>
+            <p>愿你的每一天都如今天般灿烂，充满惊喜与美好。</p>
+            <p>新的一岁，愿你所有的梦想都能成真！</p>
+        </div>
+        
+        <div class="cake-container">
+            <div class="cake">
+                <div class="cake-base"></div>
+                <div class="cake-top"></div>
+                <div class="candle"></div>
+                <div class="flame"></div>
+            </div>
+        </div>
+        
+        <button onclick="playBirthdaySong()">点击播放生日歌</button>
+    </div>
+
+    <audio id="birthdaySong" src="happy-birthday.mp3"></audio>
+
+    <script>
+        function playBirthdaySong() {
+            const audio = document.getElementById('birthdaySong');
+            audio.play();
+            
+            // 添加更多彩色纸屑
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                document.querySelector('.decoration').appendChild(confetti);
+            }
+            
+            // 改变按钮文字
+            const button = document.querySelector('button');
+            button.textContent = '生日快乐！';
+            button.style.background = '#4caf50';
+        }
+        
+        // 自动播放音乐（需要用户交互，所以注释掉）
+        // window.addEventListener('click', function() {
+        //     document.getElementById('birthdaySong').play();
+        // });
+    </script>
+</body>
+</html>
